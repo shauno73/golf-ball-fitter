@@ -56,7 +56,7 @@ export const QUESTIONS = [
   },
   {
     number: 6, section: 'profile', key: 'missPattern', type: 'single-select',
-    prompt: 'Under pressure, what's your typical miss?',
+    prompt: "Under pressure, what's your typical miss?",
     options: [
       { value: 'hook', label: 'Hook' },
       { value: 'slice', label: 'Slice' },
