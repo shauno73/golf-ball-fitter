@@ -509,15 +509,27 @@ function renderFeedbackWidget(submissionSavePromise) {
   // One shared submit button, shown once a rating is picked — rather than
   // creating a new one per rating-button click, which would stack up
   // duplicate "Submit feedback" buttons if the tester changed their mind.
+  const errorMsg = el('div', { class: 'feedback-error', style: 'display:none' });
+
   const submitBtn = el('button', {
     class: 'continue-btn', text: 'Submit feedback',
     onClick: async () => {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
-      const submissionId = await submissionSavePromise;
-      await saveFeedback(submissionId, selectedRating, commentInput.value || null);
-      wrap.querySelectorAll('button, textarea').forEach(node => node.remove());
-      thanks.style.display = 'block';
+      errorMsg.style.display = 'none';
+      try {
+        const submissionId = await submissionSavePromise;
+        const ok = await saveFeedback(submissionId, selectedRating, commentInput.value || null);
+        if (!ok) throw new Error('save returned false');
+        wrap.querySelectorAll('button, textarea').forEach(node => node.remove());
+        thanks.style.display = 'block';
+      } catch (err) {
+        console.error('Feedback submission failed:', err);
+        errorMsg.textContent = "Couldn't send that — check your connection and try again.";
+        errorMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit feedback';
+      }
     },
   });
   submitBtn.style.display = 'none';
@@ -545,6 +557,7 @@ function renderFeedbackWidget(submissionSavePromise) {
   wrap.appendChild(options);
   wrap.appendChild(commentField);
   wrap.appendChild(submitBtn);
+  wrap.appendChild(errorMsg);
   wrap.appendChild(thanks);
   app.appendChild(wrap);
 }

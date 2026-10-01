@@ -270,6 +270,11 @@ input[type="number"] { max-width: 160px; }
 .feedback-widget {
   margin-top: 8px;
 }
+.feedback-error {
+  color: #8B3A3A;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
 .feedback-thanks {
   font-family: 'Fraunces', serif;
   color: var(--moss);
