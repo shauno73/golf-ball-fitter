@@ -1,0 +1,6 @@
+.git/
+.github/
+wrangler.jsonc
+supabase-schema.sql
+SETUP-SUPABASE.md
+README.md
