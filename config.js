@@ -4,5 +4,5 @@
 // supabase-schema.sql) is what actually controls access, not secrecy of
 // this key. Never put your service_role key here — that one is secret.
 
-export const SUPABASE_URL = 'REPLACE_WITH_YOUR_SUPABASE_PROJECT_URL'; // e.g. https://xxxxx.supabase.co
-export const SUPABASE_ANON_KEY = 'REPLACE_WITH_YOUR_SUPABASE_ANON_KEY';
+export const SUPABASE_URL = 'https://bfxskvmxumsavdonwxor.supabase.co';
+export const SUPABASE_ANON_KEY = 'sb_publishable_CzLGcNXJIggWOu-z7Sg28w_rVNKbyMv';
